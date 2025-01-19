@@ -1,145 +1,212 @@
-# Hotel Reservation System
+# Hotel Reservation System Frontend
 
 ## Overview
 
-The Hotel Reservation System is a full-stack application designed for managing hotel operations, including guests, rooms, and reservations. This system features a backend built with Node.js, Express.js, and PostgreSQL, and a frontend developed using Angular and Taiga UI.
+The project is a comprehensive Angular-based application designed to manage guests, rooms, and reservations for a hotel management system. It integrates with a backend service to provide efficient data management and user-friendly interfaces.
 
-## Features
+---
+
+## Directory Structure
+
+```
+├── angular.json
+├── app
+│   ├── app-routing.module.ts
+│   ├── app.component.html
+│   ├── app.component.scss
+│   ├── app.component.ts
+│   ├── app.module.ts
+│   ├── components
+│   │   ├── guest-list
+│   │   │   ├── guest-details-dialog
+│   │   │   │   ├── guest-details-dialog.component.html
+│   │   │   │   ├── guest-details-dialog.component.scss
+│   │   │   │   ├── guest-details-dialog.component.ts
+│   │   │   │   └── guest-details-dialog.module.ts
+│   │   │   ├── guest-list.component.html
+│   │   │   ├── guest-list.component.scss
+│   │   │   ├── guest-list.component.ts
+│   │   │   ├── guest-list.module.ts
+│   │   │   └── new-guest-dialog
+│   │   │       ├── new-guest-dialog.component.html
+│   │   │       ├── new-guest-dialog.component.scss
+│   │   │       ├── new-guest-dialog.component.ts
+│   │   │       └── new-guest-dialog.module.ts
+│   │   ├── new-reservation-dialog
+│   │   │   ├── new-reservation-dialog.component.html
+│   │   │   ├── new-reservation-dialog.component.scss
+│   │   │   ├── new-reservation-dialog.component.ts
+│   │   │   └── new-reservation-dialog.module.ts
+│   │   ├── progress-circle
+│   │   │   ├── progress-circle.component.html
+│   │   │   ├── progress-circle.component.scss
+│   │   │   ├── progress-circle.component.ts
+│   │   │   └── progress-circle.module.ts
+│   │   ├── reservation-calendar
+│   │   │   ├── reservation-calendar.component.html
+│   │   │   ├── reservation-calendar.component.scss
+│   │   │   ├── reservation-calendar.component.ts
+│   │   │   └── reservation-calendar.module.ts
+│   │   ├── reservation-list
+│   │   │   ├── reservation-list.component.html
+│   │   │   ├── reservation-list.component.scss
+│   │   │   ├── reservation-list.component.ts
+│   │   │   └── reservation-list.module.ts
+│   │   ├── room-list
+│   │   │   ├── room-details-dialog
+│   │   │   │   ├── room-details-dialog.component.html
+│   │   │   │   ├── room-details-dialog.component.scss
+│   │   │   │   ├── room-details-dialog.component.ts
+│   │   │   │   └── room-details-dialog.module.ts
+│   │   │   ├── room-list.component.html
+│   │   │   ├── room-list.component.scss
+│   │   │   ├── room-list.component.ts
+│   │   │   └── room-list.module.ts
+│   │   └── sidebar
+│   │       ├── sidebar.component.html
+│   │       ├── sidebar.component.scss
+│   │       ├── sidebar.component.ts
+│   │       └── sidebar.module.ts
+│   ├── services
+│   │   ├── guest.service.ts
+│   │   ├── reservation.service.ts
+│   │   └── room.service.ts
+│   └── shared
+│       ├── components
+│       │   └── progress-circle
+│       │       ├── progress-circle.component.html
+│       │       ├── progress-circle.component.scss
+│       │       ├── progress-circle.component.ts
+│       │       └── progress-circle.module.ts
+│       ├── constants
+│       │   └── constants.ts
+│       └── models
+│           ├── guest.model.ts
+│           ├── reservation.model.ts
+│           └── room.model.ts
+├── assets
+├── environments
+│   ├── environment.prod.ts
+│   └── environment.ts
+├── index.html
+├── main.ts
+├── polyfills.ts
+├── styles.scss
+├── test.ts
+└── tsconfig.json
+```
+
+---
+
+## Core Features and Components
 
 ### Guests Management
 
-- View paginated guest lists.
-- Retrieve guest details, including total past reservations.
-- Create and update guest information.
+- **Guest List:** Displays a paginated list of guests (`guest-list.component.ts`).
+- **Guest Details:** Shows detailed information about a guest (`guest-details-dialog.component.ts`).
+- **New Guest Dialog:** Enables adding a new guest (`new-guest-dialog.component.ts`).
 
 ### Rooms Management
 
-- View paginated room lists with sorting options.
-- Retrieve room details, including current and upcoming reservations.
-- Create and update room information.
+- **Room List:** Displays a paginated list of rooms (`room-list.component.ts`).
+- **Room Details:** Provides detailed room information (`room-details-dialog.component.ts`).
 
 ### Reservations Management
 
-- View paginated reservation lists.
-- Retrieve reservations with room and guest details.
-- Calendar view for monthly reservations with busy day highlights.
-- Create reservations with date range validation and conflict detection.
-- Cancel reservations.
+- **Reservation List:** Shows a paginated list of reservations (`reservation-list.component.ts`).
+- **Reservation Calendar:** Displays a calendar view of reservations (`reservation-calendar.component.ts`).
+- **New Reservation Dialog:** Facilitates creating new reservations (`new-reservation-dialog.component.ts`).
 
-## Backend Directory Structure
+---
 
+## API Integration
+
+### Guest Service (`guest.service.ts`)
+
+- **Fetch Guests:** Retrieves a paginated list of guests (`getAllGuests`).
+- **Guest Details:** Fetches details for a specific guest (`getGuestById`).
+- **Create Guest:** Adds a new guest (`createGuest`).
+
+### Room Service (`room.service.ts`)
+
+- **Fetch Rooms:** Retrieves a paginated list of rooms (`getAllRooms`).
+- **Room Details:** Fetches details for a specific room (`getRoomById`).
+
+### Reservation Service (`reservation.service.ts`)
+
+- **Fetch Reservations:** Retrieves a paginated list of reservations (`getAllReservations`).
+- **Cancel Reservation:** Cancels a reservation (`cancelReservation`).
+- **Create Reservation:** Adds a new reservation (`createReservation`).
+- **Monthly Reservations:** Fetches reservation data for a specific month (`getReservationsByMonth`).
+
+---
+
+## Environment Configuration
+
+Environment-specific settings can be modified in:
+
+- `environment.ts`: For development.
+- `environment.prod.ts`: For production.
+
+### Example Configuration
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000/api',
+};
 ```
-├── app.ts
-├── config
-├── controllers
-│   ├── guests.controller.ts
-│   ├── reservations.controller.ts
-│   └── rooms.controller.ts
-├── db
-│   ├── index.ts
-│   ├── migrations
-│   └── seeds
-├── middleware
-│   └── validation.ts
-├── routes
-│   ├── guests.routes.ts
-│   ├── reservations.routes.ts
-│   └── rooms.routes.ts
-├── server.ts
-├── services
-│   ├── guest.service.ts
-│   ├── reservations.service.ts
-│   └── rooms.service.ts
-├── tests
-│   ├── guest.service.spec.ts
-│   ├── guests.routes.spec.ts
-│   ├── reservations.routes.spec.ts
-│   ├── reservations.service.spec.ts
-│   ├── rooms.routes.spec.ts
-│   └── rooms.service.spec.ts
-├── types
-│   ├── guest.types.ts
-│   ├── reservations.types.ts
-│   └── rooms.types.ts
-└── utils
-```
 
-## Prerequisites
+---
 
-- Node.js v14 or later
-- PostgreSQL
-- Angular CLI
-- Taiga UI
-- npm or yarn
+## Styling and Theming
 
-## Setup Instructions
+- **SCSS** is used for styling the application.
+- `styles.scss`: Includes global styles, Taiga UI themes, and Tailwind CSS.
 
-### Backend Setup
-
-1. Clone the repository.
-2. Navigate to the backend directory.
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Configure environment variables in `.env`:
-   ```env
-   DB_HOST=your-database-host
-   DB_USER=your-database-user
-   DB_PASSWORD=your-database-password
-   DB_NAME=your-database-name
-   ```
-5. Run database migrations and seed data:
-   ```bash
-   npm run migrate
-   npm run seed
-   ```
-6. Start the server:
-   ```bash
-   npm start
-   ```
-
-### Frontend Setup
-
-1. Navigate to the frontend directory.
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   ng serve
-   ```
-
-## API Endpoints
-
-### Guests
-
-- `GET /api/guests`: Retrieve paginated guests.
-- `GET /api/guests/:id`: Retrieve guest details.
-- `POST /api/guests`: Create a guest.
-- `PUT /api/guests/:id`: Update guest details.
-
-### Rooms
-
-- `GET /api/rooms`: Retrieve paginated rooms.
-- `GET /api/rooms/:id`: Retrieve room details.
-- `POST /api/rooms`: Create a room.
-- `PUT /api/rooms/:id`: Update room details.
-
-### Reservations
-
-- `GET /api/reservations`: Retrieve paginated reservations.
-- `GET /api/reservations/:id`: Retrieve reservation details.
-- `POST /api/reservations`: Create a reservation.
-- `PUT /api/reservations/:id`: Update reservation details.
-- `DELETE /api/reservations/:id`: Cancel a reservation.
-- `GET /api/reservations/calendar`: Retrieve monthly reservations.
+---
 
 ## Testing
 
-Run unit and integration tests using Jest and Supertest:
+- **Unit Tests:** Use Karma and Jasmine for unit testing.
+- **Integration Tests:** Add integration tests within `.spec.ts` files.
+- `test.ts`: Entry point for running all tests.
+
+---
+
+## Prerequisites
+
+Ensure the following are installed:
+
+- Node.js v14 or later
+- Angular CLI
+- PostgreSQL (for backend services)
+- Taiga UI Library
+
+---
+
+## Setup Instructions
+
+### Install Dependencies
+
+Run the following command to install all required dependencies:
 
 ```bash
-npm test
+npm install
 ```
+
+### Start Development Server
+
+Run the development server using the command:
+
+```bash
+ng serve
+```
+
+---
+
+## Important Notes
+
+1. Ensure the backend services are running before starting the frontend.
+2. Update the `environment.ts` file with the correct API base URL.
+3. Follow the directory structure to maintain consistency and scalability.
