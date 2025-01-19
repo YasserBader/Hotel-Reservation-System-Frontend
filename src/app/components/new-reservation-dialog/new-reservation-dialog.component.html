@@ -1,0 +1,40 @@
+<tui-dialog size="l">
+  <tui-dialog-header> New Reservation </tui-dialog-header>
+
+  <tui-dialog-content>
+    <form [formGroup]="reservationForm" (ngSubmit)="submitForm()">
+      <tui-select formControlName="guest_id" tuiTextfieldControllerSize="m" class="mb-4" [tuiTextfieldCleaner]="true">
+        Select Guest
+        <tui-data-list *tuiDataList>
+          <button *ngFor="let guest of guests" tuiOption [value]="guest.guest_id">
+            {{ guest.name }}
+          </button>
+        </tui-data-list>
+      </tui-select>
+
+      <tui-select formControlName="room_id" tuiTextfieldControllerSize="m" class="mb-4" [tuiTextfieldCleaner]="true">
+        Select Room
+        <tui-data-list *tuiDataList>
+          <button *ngFor="let room of rooms" tuiOption [value]="room.room_id">
+            {{ room.room_number }} - {{ room.room_name }}
+          </button>
+        </tui-data-list>
+      </tui-select>
+      <tui-input formControlName="check_in_date" tuiTextfieldControllerSize="m" class="mb-4">
+        Check In
+        <input tuiTextfield type="date" [tuiTextfieldMin]="min" />
+      </tui-input>
+      <tui-input formControlName="check_out_date" tuiTextfieldControllerSize="m" class="mb-4">
+        Check Out
+        <input tuiTextfield type="date" [tuiTextfieldMin]="min" />
+      </tui-input>
+
+      <div class="flex justify-end mt-4">
+        <button tuiButton type="button" size="m" appearance="secondary" (click)="closeDialog()" class="mr-2">
+          Cancel
+        </button>
+        <button tuiButton type="submit" size="m" appearance="primary">Save</button>
+      </div>
+    </form>
+  </tui-dialog-content>
+</tui-dialog>
