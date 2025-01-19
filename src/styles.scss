@@ -1,0 +1,8 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.scss';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  background-color: #e5e7eb; /* Equivalent to bg-gray-200 */
+}
