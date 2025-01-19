@@ -1,0 +1,56 @@
+<div class="p-4">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Guests</h2>
+    <button tuiButton type="button" size="m" (click)="onOpenNewGuestDialog()">New Guest +</button>
+  </div>
+  <tui-table
+    *ngIf="!loading; else loadingTemplate"
+    [columns]="columns"
+    [data]="guests"
+    (sorterChange)="onSort($event)"
+    class="w-full border-collapse"
+  >
+    <ng-template tuiTh [tuiThSort]="'id'" let-sort>
+      ID
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh [tuiThSort]="'name'" let-sort>
+      Name
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh [tuiThSort]="'email'" let-sort>
+      Email
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh [tuiThSort]="'phone_number'" let-sort>
+      Phone Number
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh> Reservations </ng-template>
+    <ng-template let-guest tuiTr>
+      <td tuiTd>{{ guest.guest_id }}</td>
+      <td tuiTd>{{ guest.name }}</td>
+      <td tuiTd>{{ guest.email }}</td>
+      <td tuiTd>{{ guest.phone_number }}</td>
+      <td tuiTd>
+        <button tuiButton type="button" size="s" appearance="secondary" (click)="onOpenDetailsDialog(guest)">
+          View
+        </button>
+      </td>
+    </ng-template>
+  </tui-table>
+  <ng-template #loadingTemplate>
+    <div class="flex justify-center items-center h-32">
+      <tui-loader size="l"></tui-loader>
+    </div>
+  </ng-template>
+  <tui-pagination
+    *ngIf="!loading && total > limit"
+    [total]="total"
+    [size]="'m'"
+    [(page)]="page"
+    (pageChange)="onPageChange($event)"
+    [maxPages]="5"
+    class="mt-4 flex justify-end"
+  ></tui-pagination>
+</div>

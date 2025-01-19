@@ -1,0 +1,32 @@
+<tui-dialog size="l">
+  <tui-dialog-header> Guest Details </tui-dialog-header>
+
+  <tui-dialog-content>
+    <div *ngIf="!loading; else loadingTemplate" class="p-4">
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold">Guest Information</h3>
+        <p><strong>ID:</strong> {{ guest.guest_id }}</p>
+        <p><strong>Name:</strong> {{ guest.name }}</p>
+        <p><strong>Email:</strong> {{ guest.email }}</p>
+        <p><strong>Phone Number:</strong> {{ guest.phone_number }}</p>
+      </div>
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold">Past Reservations</h3>
+        <p><strong>Total:</strong> {{ guest.totalPastReservations }}</p>
+      </div>
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold">Upcoming Reservations</h3>
+        <!-- You can add a table or list of upcoming reservations here -->
+      </div>
+    </div>
+    <ng-template #loadingTemplate>
+      <div class="flex justify-center items-center h-32">
+        <tui-loader size="l"></tui-loader>
+      </div>
+    </ng-template>
+  </tui-dialog-content>
+
+  <tui-dialog-footer>
+    <button tuiButton type="button" size="m" (click)="closeDialog()">Close</button>
+  </tui-dialog-footer>
+</tui-dialog>

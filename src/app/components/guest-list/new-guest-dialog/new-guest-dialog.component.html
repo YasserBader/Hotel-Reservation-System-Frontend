@@ -1,0 +1,26 @@
+<tui-dialog size="l">
+  <tui-dialog-header> New Guest </tui-dialog-header>
+
+  <tui-dialog-content>
+    <form [formGroup]="guestForm" (ngSubmit)="submitForm()">
+      <tui-input formControlName="name" tuiTextfieldControllerSize="m" class="mb-4">
+        Name
+        <input tuiTextfield />
+      </tui-input>
+      <tui-input formControlName="email" tuiTextfieldControllerSize="m" class="mb-4">
+        Email
+        <input tuiTextfield type="email" />
+      </tui-input>
+      <tui-input formControlName="phone_number" tuiTextfieldControllerSize="m" class="mb-4">
+        Phone Number
+        <input tuiTextfield type="tel" />
+      </tui-input>
+      <div class="flex justify-end mt-4">
+        <button tuiButton type="button" size="m" appearance="secondary" (click)="closeDialog()" class="mr-2">
+          Cancel
+        </button>
+        <button tuiButton type="submit" size="m" appearance="primary">Save</button>
+      </div>
+    </form>
+  </tui-dialog-content>
+</tui-dialog>
