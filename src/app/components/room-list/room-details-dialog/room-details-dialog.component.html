@@ -1,0 +1,41 @@
+<tui-dialog size="l">
+  <tui-dialog-header> Room Details </tui-dialog-header>
+
+  <tui-dialog-content>
+    <div *ngIf="!loading; else loadingTemplate" class="p-4">
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold">Room Information</h3>
+        <p><strong>Room Number:</strong> {{ room.room_number }}</p>
+        <p><strong>Room Name:</strong> {{ room.room_name }}</p>
+      </div>
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold">Upcoming Reservations</h3>
+        <tui-table
+          *ngIf="room.reservations && room.reservations.length > 0"
+          [columns]="['check_in_date', 'check_out_date', 'guest_id']"
+          [data]="room.reservations"
+          class="w-full border-collapse"
+        >
+          <ng-template tuiTh> Check In </ng-template>
+          <ng-template tuiTh> Check Out </ng-template>
+          <ng-template tuiTh> Guest ID </ng-template>
+          <ng-template let-reservation tuiTr>
+            <td tuiTd>{{ reservation.check_in_date | date : 'yyyy/MM/dd' }}</td>
+            <td tuiTd>{{ reservation.check_out_date | date : 'yyyy/MM/dd' }}</td>
+            <td tuiTd>{{ reservation.guest_id }}</td>
+          </ng-template>
+        </tui-table>
+        <p *ngIf="!room.reservations || room.reservations.length === 0">No upcoming reservations for this room.</p>
+      </div>
+    </div>
+    <ng-template #loadingTemplate>
+      <div class="flex justify-center items-center h-32">
+        <tui-loader size="l"></tui-loader>
+      </div>
+    </ng-template>
+  </tui-dialog-content>
+
+  <tui-dialog-footer>
+    <button tuiButton type="button" size="m" (click)="closeDialog()">Close</button>
+  </tui-dialog-footer>
+</tui-dialog>

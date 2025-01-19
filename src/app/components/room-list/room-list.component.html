@@ -1,0 +1,48 @@
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Rooms</h2>
+  <tui-table
+    *ngIf="!loading; else loadingTemplate"
+    [columns]="columns"
+    [data]="rooms"
+    (sorterChange)="onSort($event)"
+    class="w-full border-collapse"
+  >
+    <ng-template tuiTh [tuiThSort]="'room_number'" let-sort>
+      Room Number
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh [tuiThSort]="'room_name'" let-sort>
+      Room Name
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh> Status </ng-template>
+    <ng-template tuiTh> Reservations </ng-template>
+
+    <ng-template let-room tuiTr>
+      <td tuiTd>{{ room.room_number }}</td>
+      <td tuiTd>{{ room.room_name }}</td>
+      <td tuiTd>
+        <!-- Add logic to display the occupancy status -->
+      </td>
+      <td tuiTd>
+        <button tuiButton type="button" size="s" appearance="secondary" (click)="onOpenDetailsDialog(room)">
+          Open Reservations
+        </button>
+      </td>
+    </ng-template>
+  </tui-table>
+  <ng-template #loadingTemplate>
+    <div class="flex justify-center items-center h-32">
+      <tui-loader size="l"></tui-loader>
+    </div>
+  </ng-template>
+  <tui-pagination
+    *ngIf="!loading && total > limit"
+    [total]="total"
+    [size]="'m'"
+    [(page)]="page"
+    (pageChange)="onPageChange($event)"
+    [maxPages]="5"
+    class="mt-4 flex justify-end"
+  ></tui-pagination>
+</div>
