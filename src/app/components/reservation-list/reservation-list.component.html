@@ -1,0 +1,69 @@
+<div class="p-4">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Reservations</h2>
+    <a tuiButton routerLink="/reservations/calendar" type="button" size="m">Calendar View</a>
+  </div>
+  <tui-table
+    *ngIf="!loading; else loadingTemplate"
+    [columns]="columns"
+    [data]="reservations"
+    (sorterChange)="onSort($event)"
+    class="w-full border-collapse"
+  >
+    <ng-template tuiTh [tuiThSort]="'room_id'" let-sort>
+      Room ID
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh [tuiThSort]="'guest_id'" let-sort>
+      Guest ID
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh [tuiThSort]="'check_in_date'" let-sort>
+      Check In
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh [tuiThSort]="'check_out_date'" let-sort>
+      Check Out
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh [tuiThSort]="'status'" let-sort>
+      Status
+      <tui-table-sort-label [sort]="sort"></tui-table-sort-label>
+    </ng-template>
+    <ng-template tuiTh> Action </ng-template>
+
+    <ng-template let-reservation tuiTr>
+      <td tuiTd>{{ reservation.room_id }}</td>
+      <td tuiTd>{{ reservation.guest_id }}</td>
+      <td tuiTd>{{ reservation.check_in_date | date : 'yyyy/MM/dd' }}</td>
+      <td tuiTd>{{ reservation.check_out_date | date : 'yyyy/MM/dd' }}</td>
+      <td tuiTd>{{ reservation.status }}</td>
+      <td tuiTd>
+        <button
+          *ngIf="reservation.status !== 'canceled'"
+          tuiButton
+          type="button"
+          size="s"
+          appearance="secondary"
+          (click)="cancelReservation(reservation)"
+        >
+          Cancel
+        </button>
+      </td>
+    </ng-template>
+  </tui-table>
+  <ng-template #loadingTemplate>
+    <div class="flex justify-center items-center h-32">
+      <tui-loader size="l"></tui-loader>
+    </div>
+  </ng-template>
+  <tui-pagination
+    *ngIf="!loading && total > limit"
+    [total]="total"
+    [size]="'m'"
+    [(page)]="page"
+    (pageChange)="onPageChange($event)"
+    [maxPages]="5"
+    class="mt-4 flex justify-end"
+  ></tui-pagination>
+</div>

@@ -1,0 +1,26 @@
+<div class="p-4">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Reservations Calendar</h2>
+    <a tuiButton routerLink="/reservations" type="button" size="m">List View</a>
+  </div>
+  <tui-calendar
+    *ngIf="!loading; else loadingTemplate"
+    [(ngModel)]="month"
+    (ngModelChange)="onMonthChange($event)"
+    [day]="month"
+  >
+    <ng-template let-day>
+      <div class="flex flex-col items-center">
+        <span class="text-sm">{{ day.day }}</span>
+        <tui-progress [value]="getProgress(day)" size="xs" [showProgress]="false" class="w-8 text-xs">{{
+          getDayContent(day)
+        }}</tui-progress>
+      </div>
+    </ng-template>
+  </tui-calendar>
+  <ng-template #loadingTemplate>
+    <div class="flex justify-center items-center h-32">
+      <tui-loader size="l"></tui-loader>
+    </div>
+  </ng-template>
+</div>
